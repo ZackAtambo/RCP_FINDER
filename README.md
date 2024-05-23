@@ -1,1 +1,1 @@
-cooking made easier
+recipe finder

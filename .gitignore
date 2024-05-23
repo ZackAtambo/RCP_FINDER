@@ -1,2 +1,49 @@
-# Local Netlify folder
-.netlify
+# Dependency directories
+/node_modules/
+/bower_components/
+
+# Distribution directory
+/dist/
+
+# Environment configuration file
+.env
+
+# IDE files
+.vscode/
+.idea/
+
+# Log files
+*.log
+
+# Compiled binary files
+*.class
+*.dll
+*.exe
+*.o
+
+# Compiled bytecode
+*.pyc
+*.pyo
+*.pyd
+
+# Compiled Java bytecode
+*.class
+
+# Package files
+*.jar
+*.war
+*.ear
+*.egg
+*.egg-info
+
+# macOS files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Cache files
+*.swp
+*.swo
