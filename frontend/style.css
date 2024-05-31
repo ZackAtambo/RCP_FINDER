@@ -1,83 +1,27 @@
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
+    font-family: Arial, sans-serif;
 }
 
-header {
-    background-color: #00bcd4;
-    color: #fff;
+.container {
+    max-width: 600px;
+    margin: 0 auto;
     padding: 20px;
-    text-align: center;
 }
 
-header h1 {
-    font-size: 2.5em;
-    margin: 0;
-}
-
-header p {
-    font-size: 1.2em;
-    margin-top: 5px;
-}
-
-#search {
-    text-align: center;
-    margin-top: 20px;
-}
-
-#search input[type="text"] {
-    width: 300px;
+input[type="text"] {
+    width: calc(100% - 80px);
     padding: 10px;
-    font-size: 1.1em;
-    border: 2px solid #00bcd4;
-    border-radius: 5px;
     margin-right: 10px;
 }
 
-#search button {
+button {
     padding: 10px 20px;
-    font-size: 1.1em;
-    background-color: #00bcd4;
-    color: #fff;
+    background-color: #4CAF50;
+    color: white;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
 }
 
-#search button:hover {
-    background-color: #007d8a;
-}
-
-#results {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.recipe {
-    width: 300px;
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-}
-
-.recipe:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.recipe img {
-    max-width: 100%;
-    height: auto;
-}
-
-.recipe h3 {
-    margin-top: 0;
-    color: #333;
+button:hover {
+    background-color: #45a049;
 }

@@ -1,39 +1,26 @@
-// Function to send a request to the backend and fetch recipes based on user input
-const searchRecipes = async () => {
-    const ingredientInput = document.getElementById('ingredientInput').value.trim();
+function searchRecipes() {
+    const ingredientInput = document.getElementById('ingredientInput').value;
+    fetch(`/recipes?ingredients=${ingredientInput}`)
+        .then(response => response.json())
+        .then(data => {
+            displayRecipes(data.results);
+        })
+        .catch(error => {
+            console.error('Error fetching recipes:', error);
+        });
+}
 
-    // If input is empty, do nothing
-    if (!ingredientInput) return;
-
-    try {
-        const response = await fetch(`/api/recipes?ingredients=${ingredientInput}`);
-        const data = await response.json();
-
-        displayRecipes(data);
-    } catch (error) {
-        console.error('Error fetching recipes:', error);
-    }
-};
-
-// Function to display recipes on the page
-const displayRecipes = (recipes) => {
-    const resultsDiv = document.getElementById('results');
-    resultsDiv.innerHTML = ''; // Clear previous results
-
+function displayRecipes(recipes) {
+    const recipeResults = document.getElementById('recipeResults');
+    recipeResults.innerHTML = '';
     recipes.forEach(recipe => {
-        const recipeDiv = document.createElement('div');
-        recipeDiv.classList.add('recipe');
-
-        const recipeImage = document.createElement('img');
-        recipeImage.src = recipe.image;
-        recipeImage.alt = recipe.title;
-
-        const recipeTitle = document.createElement('h3');
-        recipeTitle.textContent = recipe.title;
-
-        recipeDiv.appendChild(recipeImage);
-        recipeDiv.appendChild(recipeTitle);
-
-        resultsDiv.appendChild(recipeDiv);
+        const recipeElement = document.createElement('div');
+        recipeElement.classList.add('recipe');
+        recipeElement.innerHTML = `
+            <h3>${recipe.title}</h3>
+            <img src="${recipe.image}" alt="${recipe.title}">
+            <p>Ready in ${recipe.readyInMinutes} minutes</p>
+        `;
+        recipeResults.appendChild(recipeElement);
     });
-};
+}
