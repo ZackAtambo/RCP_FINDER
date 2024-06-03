@@ -1,28 +1,28 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const recipeRoutes = require('./routes/recipeRoutes');
+require('dotenv').config();
 
-// Change require() to import() for importing node-fetch
-import('node-fetch').then(fetch => {
-    const app = express();
-    const PORT = process.env.PORT || 3000;
+const app = express();
+const port = 3001; // Change the port to 3001
 
-    app.use(express.static('frontend'));
+// Middleware
+app.use(cors());
+app.use(express.json());
 
-    app.get('/recipes', async (req, res) => {
-        try {
-            const ingredients = req.query.ingredients;
-            const apiKey = 'd35b9c8605944ae6a82e8d41931c46e6'; // Spoonacular API key
-            const response = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=5&apiKey=${apiKey}`);
-            const data = await response.json();
-            res.json({ results: data });
-        } catch (error) {
-            console.error('Error fetching recipes:', error);
-            res.status(500).json({ error: 'Error fetching recipes' });
-        }
-    });
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('MongoDB connected...'))
+    .catch(err => console.error('MongoDB connection error:', err));
 
-    app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
-    });
-}).catch(error => {
-    console.error('Error importing node-fetch:', error);
+// Use routes
+app.use(recipeRoutes);
+
+// Serve static files (frontend)
+app.use(express.static('../frontend'));
+
+// Start server
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
 });
