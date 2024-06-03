@@ -1,11 +1,13 @@
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const recipeRoutes = require('./routes/recipeRoutes');
+const recipeRoutes = require('./routes/recipeRoutes'); // Import the recipeRoutes
+
 require('dotenv').config();
 
 const app = express();
-const port = 3001; // Change the port to 3001
+const port = process.env.PORT || 3001; // Use the PORT environment variable or default to 3001
 
 // Middleware
 app.use(cors());
@@ -16,8 +18,8 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
     .then(() => console.log('MongoDB connected...'))
     .catch(err => console.error('MongoDB connection error:', err));
 
-// Use routes
-app.use(recipeRoutes);
+// Use recipeRoutes middleware
+app.use('/api', recipeRoutes);
 
 // Serve static files (frontend)
 app.use(express.static('../frontend'));

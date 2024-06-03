@@ -1,12 +1,12 @@
 const express = require('express');
+const router = express.Router(); // Define the router object
 let fetch;
 try {
     fetch = require('node-fetch');
 } catch (error) {
-    fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+    fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 }
 const Recipe = require('../models/Recipe');
-const router = express.Router();
 require('dotenv').config();
 
 const apiKey = process.env.SPOONACULAR_API_KEY;
@@ -38,4 +38,4 @@ router.get('/recipes', async (req, res) => {
     }
 });
 
-module.exports = router;
+module.exports = router; // Export the router object

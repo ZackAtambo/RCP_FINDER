@@ -1,18 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe Finder</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RCP Finder</title>
+  <style>
+    /* Add your CSS styles here */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .cover-image {
+      width: 100%;
+      max-height: 500px;
+      object-fit: cover;
+    }
+    .btn {
+      display: inline-block;
+      background-color: #333;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .about-section {
+      padding: 2rem;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Recipe Finder</h1>
-        <input type="text" id="ingredientInput" placeholder="Enter ingredients separated by commas">
-        <button onclick="searchRecipes()">Search</button>
-        <div id="recipeResults"></div>
+  <header>
+    <h1>RCP Finder</h1>
+    <p>Discover new recipes and cook like a pro!</p>
+    <nav>
+      <a href="#features">Features</a> | 
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <img src="images/cover-image.jpg" alt="Cover Image" class="cover-image">
+    <div>
+      <h2>Find Your Recipes</h2>
+      <p>Discover new recipes and cook like a pro!</p>
+      <form onsubmit="fetchRecipes(event)">
+        <input type="text" id="ingredients" placeholder="Enter ingredients...">
+        <button type="submit" class="btn">Search Recipes</button>
+      </form>
     </div>
-    <script src="script.js"></script>
+  </div>
+
+  <section id="about" class="about-section">
+    <h2>About</h2>
+    <p>This project was inspired by my passion for cooking and the desire to create a convenient tool for finding delicious recipes. As a Portfolio Project for Holberton School, I embarked on this journey to showcase my skills and provide a valuable resource for fellow food enthusiasts.</p>
+    <p>Connect with me on GitHub: <a href="https://github.com/ZackAtambo/RCP_FINDER">RCP Finder Repository</a></p>
+  </section>
+
+  <script>
+    function fetchRecipes(event) {
+      event.preventDefault(); // Prevent form submission
+      const ingredients = document.getElementById('ingredients').value;
+      fetch(`http://localhost:3001/recipes?ingredients=tomato,cheese,eggs,onion`)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          // Process the data received from the backend
+          // For now, just log it to the console
+        })
+        .catch(error => {
+          console.error('Error fetching recipes:', error);
+        });
+    }
+  </script>
 </body>
 </html>
